@@ -1,26 +1,20 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-main: #84A98C;
+  --color-secondary: #7E6551;
+  --color-content: #291528;
+  
+  /* Ajoute ta nouvelle couleur de fond ici */
+  --color-background: #FAF8F5; 
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter), sans-serif;
+  --font-title: var(--font-playfair), serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* On applique la couleur au fond du site */
+  background-color: var(--color-background); 
+  color: var(--color-content);
+  font-family: var(--font-sans);
 }
