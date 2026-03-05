@@ -78,7 +78,7 @@ export default function Footer() {
                     <Link href="/confidentialite" className="hover:text-[#F9F7F2] transition-colors">
                         Cookie Policy
                     </Link>
-                    <p className="mt-4">Designed by toi</p>
+                    <p className="mt-4">Designed by <Link href="https://atelier-voisin.fr/">Atelier Voisin</Link></p>
                 </div>
 
             </div>

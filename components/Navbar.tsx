@@ -1,71 +1,66 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+    // Récupère l'URL actuelle (ex: "/menu" ou "/a-propos")
+    const pathname = usePathname();
+
     return (
-        <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
+        <header className="fixed top-0 left-0 w-full z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-content/5">
+            <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
 
-            {/* 1. Zone Gauche : Le Logo */}
-            <div className="flex-1 flex justify-start">
-                <Link href="/">
-                    <Image
-                        src="/logo.svg"
-                        alt="Logo La Table des Olivier"
-                        width={60}
-                        height={40}
-                        className="h-10 w-auto" // Laisse la hauteur dicter la taille
-                        priority
-                    />
-                </Link>
-            </div>
-
-            {/* 2. Zone Centrale : Les liens de navigation */}
-            <ul className="hidden md:flex flex-1 justify-center gap-10">
-                <li>
-                    <Link href="/menu" className="text-content hover:text-main transition-colors text-sm font-medium">
-                        Le menu
+                {/* 1. Zone Gauche : Le Logo */}
+                <div className="flex-1 flex justify-start">
+                    <Link href="/">
+                        <Image
+                            src="/logo.svg"
+                            alt="Logo La Table des Oliviers"
+                            width={60}
+                            height={40}
+                            className="h-10 w-auto" 
+                            priority
+                        />
                     </Link>
-                </li>
-                <li>
-                    <Link href="/a-propos" className="text-content hover:text-main transition-colors text-sm font-medium">
-                        A propos
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/infos-pratiques" className="text-content hover:text-main transition-colors text-sm font-medium">
-                        Infos pratiques
-                    </Link>
-                </li>
-            </ul>
+                </div>
 
-            {/* 3. Zone Droite : Les icônes réseaux sociaux */}
-            <div className="flex-1 flex justify-end">
-                <Link
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-content hover:text-main transition-colors"
-                >
-                    {/* SVG direct de l'icône Instagram pour t'éviter d'installer une librairie */}
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-5 h-5"
-                    >
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
-                </Link>
-            </div>
+                {/* 2. Zone Centrale : Les liens de navigation */}
+                <ul className="hidden md:flex flex-1 justify-center gap-12">
+                    <li>
+                        <Link 
+                            href="/menu" 
+                            // Si le pathname est "/menu", on met le texte en couleur secondaire (marron), sinon on laisse la couleur par défaut
+                            className={`transition-colors text-sm tracking-wide ${
+                                pathname === '/menu' 
+                                ? 'text-secondary font-semibold' 
+                                : 'text-content font-medium hover:text-secondary'
+                            }`}
+                        >
+                            Le menu
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            href="/a-propos" 
+                            className={`transition-colors text-sm tracking-wide ${
+                                pathname === '/a-propos' 
+                                ? 'text-secondary font-semibold' 
+                                : 'text-content font-medium hover:text-secondary'
+                            }`}
+                        >
+                            À propos
+                        </Link>
+                    </li>
+                </ul>
 
-        </nav>
+                {/* 3. Zone Droite : Vide, mais indispensable pour garder les liens centrés */}
+                <div className="flex-1 flex justify-end">
+                    {/* Instagram et Infos pratiques ont été retirés */}
+                </div>
+
+            </nav>
+        </header>
     );
 }

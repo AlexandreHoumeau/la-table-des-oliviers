@@ -1,12 +1,12 @@
 "use client";
 
 import Image from 'next/image';
-import { motion, AnimatePresence, Variants, useScroll, useTransform } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion, Variants, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { useLoader } from '@/context/LoaderContext';
 
 export default function Home() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
+    const { isLoading } = useLoader();
 
     const transitionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -17,23 +17,6 @@ export default function Home() {
     const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
     const xRight = useTransform(scrollYProgress, [0, 1], ["-30%", "0%"]);
 
-    useEffect(() => {
-        let currentProgress = 0;
-        const interval = setInterval(() => {
-            currentProgress += Math.floor(Math.random() * 12) + 2;
-            if (currentProgress >= 100) {
-                currentProgress = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 500);
-            }
-            setProgress(currentProgress);
-        }, 150);
-
-        return () => clearInterval(interval);
-    }, []);
-
     const fadeUp: Variants = {
         hidden: { opacity: 0, y: 40 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -41,33 +24,6 @@ export default function Home() {
 
     return (
         <div className="min-h-screen">
-
-            {/* ÉCRAN DE CHARGEMENT CIRCULAIRE */}
-            <AnimatePresence>
-                {isLoading && (
-                    <motion.div
-                        key="loader"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-                        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF8F5] text-content"
-                    >
-                        <div className="relative flex items-center justify-center w-64 h-64">
-                            <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 12, ease: "linear" }} className="absolute inset-0 w-full h-full">
-                                <svg viewBox="0 0 200 200" className="w-full h-full overflow-visible">
-                                    <path id="circlePath" d="M 100, 30 a 70,70 0 1,1 0,140 a 70,70 0 1,1 0,-140" fill="none" />
-                                    <text fill="currentColor" className="font-title text-[13px] uppercase tracking-[0.15em]">
-                                        <textPath href="#circlePath" startOffset="0" textLength="439" lengthAdjust="spacing">
-                                            LA TABLE DES OLIVIERS • LA TABLE DES OLIVIERS •
-                                        </textPath>
-                                    </text>
-                                </svg>
-                            </motion.div>
-                            <Image src="/logo.svg" alt="Logo" width={80} height={80} className="w-20 h-auto" priority />
-                        </div>
-                        <div className="mt-8 font-title text-xl tracking-widest">{progress}%</div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
 
             {/* 1. SECTION TEXTE */}
             <motion.section
