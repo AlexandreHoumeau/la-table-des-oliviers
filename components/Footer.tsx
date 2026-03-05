@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import SpinningLogo from './SpinningLogo';
 
 export default function Footer() {
     return (
@@ -39,18 +39,8 @@ export default function Footer() {
             </div>
 
             {/* --- CENTRE DU FOOTER (PARFAITEMENT CENTRÉ) --- */}
-            {/* flex-1 permet à cette zone de pousser le haut vers le haut, et le bas vers le bas */}
-            <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full py-12">
-                <Image
-                    src="/logo.svg"
-                    alt="Logo La Table des Oliviers"
-                    width={120}
-                    height={100}
-                    className="w-24 md:w-32 h-auto brightness-0 invert"
-                />
-                <h2 className="font-title text-6xl md:text-8xl lg:text-9xl tracking-wider uppercase leading-none text-center">
-                    La Table<br />des Oliviers
-                </h2>
+            <div className="flex-1 flex items-center justify-center w-full py-12">
+                <SpinningLogo />
             </div>
 
             {/* --- BAS DU FOOTER --- */}
