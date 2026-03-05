@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion, Variants, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useLoader } from '@/context/LoaderContext';
+import Link from 'next/link';
 
 export default function Home() {
     const { isLoading } = useLoader();
@@ -40,9 +41,12 @@ export default function Home() {
                     Notre chef sélectionne chaque jour des produits frais, locaux et de saison pour
                     vous proposer une cuisine généreuse, raffinée et pleine de saveurs.
                 </motion.p>
-                <motion.button variants={fadeUp} className="bg-secondary text-white font-title text-xl tracking-wide uppercase px-8 py-4 rounded-tl-none rounded-tr-4xl rounded-br-none rounded-bl-4xl hover:bg-[#6A5443] transition-colors shadow-md">
-                    LE MENU
-                </motion.button>
+                <Link href={`/menu`}>
+                    <motion.button variants={fadeUp} className="bg-secondary text-white font-title text-xl tracking-wide uppercase px-8 py-4 rounded-tl-none rounded-tr-4xl rounded-br-none rounded-bl-4xl hover:bg-[#6A5443] transition-colors shadow-md">
+                        LE MENU
+                    </motion.button>
+
+                </Link>
             </motion.section>
 
             {/* 2. SECTION GALERIE AU SCROLL (Maintenant 100% responsive) */}
@@ -54,7 +58,7 @@ export default function Home() {
                         <motion.div
                             initial={{ opacity: 0, y: 60, scale: 0.9 }}
                             animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 60 : 0, scale: isLoading ? 0.9 : 1 }}
-                            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }} 
+                            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
                             className="w-full sm:w-10/12 md:w-auto rounded-sm -rotate-2 shadow-2xl"
                         >
                             {/* Hauteur fixe sur mobile (45vh) pour un rendu propre, puis max-h sur desktop */}
@@ -140,9 +144,11 @@ export default function Home() {
                             Dans une ambiance chaleureuse et élégante, nous vous accueillons pour des déjeuners conviviaux, des dîners romantiques ou des moments entre amis.
                         </motion.p>
 
-                        <motion.button variants={fadeUp} className="mt-4 bg-transparent border border-secondary text-secondary font-title text-sm tracking-widest uppercase px-8 py-4 rounded-tl-none rounded-tr-3xl rounded-br-none rounded-bl-3xl hover:bg-secondary hover:text-white transition-colors">
-                            EN SAVOIR PLUS
-                        </motion.button>
+                        <Link href={`/a-propos`}>
+                            <motion.button variants={fadeUp} className="mt-4 bg-transparent border border-secondary text-secondary font-title text-sm tracking-widest uppercase px-8 py-4 rounded-tl-none rounded-tr-3xl rounded-br-none rounded-bl-3xl hover:bg-secondary hover:text-white transition-colors">
+                                EN SAVOIR PLUS
+                            </motion.button>
+                        </Link>
                     </div>
 
                     {/* Colonne Droite : Images */}
